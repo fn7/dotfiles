@@ -1,23 +1,43 @@
-set tabstop=2
-set shiftwidth=2
-set softtabstop=2
-set expandtab
-set nu
-set autoindent
-set t_Co=256
-colorscheme hhdyellow
+syntax on
+set nu et ai
 set hlsearch
 set laststatus=2
-set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
-set hid
-
-highlight StatusLine   term=NONE cterm=NONE ctermfg=cyan ctermbg=black
-
-call pathogen#runtime_append_all_bundles()
+set t_Co=256
 
 
-"helptags ~/.vim/doc
+set nocompatible               " Be iMproved
 
-" neocomplcache
-let g:neocomplcache_enable_at_startup = 1 "起動時に有効化
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Recommended to install
+" After install, turn shell ~/.vim/bundle/vimproc, (n,g)make -f your_machines_makefile
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/unite.vim'
+"NeoBundle 'Lokaltog/powerline'
+NeoBundle 'bling/vim-airline'
+
+
+
+filetype plugin indent on     " Required!
+"
+" Brief help
+" :NeoBundleList          - list configured bundles
+" :NeoBundleInstall(!)    - install(update) bundles
+" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+
+" Installation check.
+NeoBundleCheck
+
+let g:airline_theme='solarized'
+let g:airline_powerline_fonts=1
+
+autocmd FileType ruby setlocal ts=8 sw=2 sts=2
+autocmd FileType javascript setlocal ts=4 sw=2 sts=2
+autocmd FileType html setlocal ts=4 sw=2 sts=2
